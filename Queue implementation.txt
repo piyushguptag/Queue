@@ -1,0 +1,95 @@
+/******************************************************************************
+
+                            Online Java Compiler.
+                Code, Compile, Run and Debug java program online.
+Write your code in this editor and press "Run" button to execute it.
+
+*******************************************************************************/
+
+public class Main
+{
+    private listNode rear;
+    private listNode front;
+    private int length;
+    
+    private class listNode{
+        private int data;
+        private listNode next;
+        
+        public listNode(int data){
+            this.data = data;
+        }
+    }
+    public Main(){
+        rear = null;
+        front = null;
+        length =0;
+    }
+    public int length(){
+        return length;
+    }
+    
+    public boolean isEmpty(){
+        return length ==0;
+    }
+    
+    public void enqueue(int n){
+        listNode newNode = new listNode(n);
+        if(isEmpty()){
+            front =newNode;
+            rear = newNode;
+            length++;
+        }else{
+            rear.next = newNode;
+            rear = newNode;
+            length++;
+        }
+    }
+    public int dequeue(){
+        if(isEmpty()){
+            System.out.println("NO element there in queue");
+            return 0;
+        }
+        listNode temp = front;
+        front = front.next;
+        temp.next = null;
+        if(front == null){
+            rear = null;
+        }
+        length--;
+        return temp.data;
+    }
+    public int first(){
+        if(isEmpty()){
+            System.out.println("no element");
+            return 0;
+        }
+        return front.data;
+    }
+    public int last(){
+        if(isEmpty()){
+            System.out.println("no element");
+            return 0;
+        }
+        return rear.data;
+    }
+    public void print(){
+        if(isEmpty()){
+            return;
+        }
+        listNode curr = front;
+        while(curr != null){
+            System.out.print(curr.data + " -->");
+            curr= curr.next;
+        }
+        System.out.println("null");
+    }
+	public static void main(String[] args) {
+		Main qu = new Main();
+		qu.enqueue(1);
+		qu.enqueue(2);
+		qu.print();
+		System.out.println(qu.dequeue());
+		qu.print();
+	}
+}
